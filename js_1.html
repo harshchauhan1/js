@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function check(status) {
+ 
+  var field=document.getElementsByTagName("input");
+
+   for(i=0; i<field.length; i++)
+{  
+      field[i].checked=status;
+
+  }
+
+}
+
+</script>
+</head>
+<body>
+
+	<form>	
+		<input type="checkbox" name="color"/>Red<br/>
+		<input type="checkbox" name="color"/>yellow<br/>
+		<input type="checkbox" name="color"/>greewn<br/>
+		<input type="checkbox" name="color"/>white<br/>
+		<input type="checkbox" name="color"/>black<br/>
+		<a href="" onclick="check(true); return false;" >Check Checkbox</a>
+		<a href="" onclick="check(false); return false;" >Uncheck Checkbox</a>	
+	</form>
+
+	
+
+</body>
+</html>
+
+
