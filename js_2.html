@@ -1,0 +1,62 @@
+<html>
+<head>
+<script type="text/javascript">
+var count=0;
+var str='';
+function check(element)
+{ 	var field= document.getElementsByTagName("input");  
+ 	document.getElementsByName("none")[0].checked=false;
+
+	if(element.checked)
+	count++;
+         
+	else
+{	count--;
+       console.log(count);   
+}	
+
+        if(count>3)
+	{       element.checked=false;
+		count--;
+		str='';
+        for(var i=0; i<field.length; i++)
+       	{	 if(field[i].checked)
+		 str+=field[i].value+ ' ';
+	
+	}
+	alert("you can select maximum 3 days. you already selected \n"+str);
+        
+}
+
+}
+
+function uncheck()
+{count=0;
+ str='';
+	var field= document.getElementsByTagName("input");
+	for(i=0; i<field.length-1; i++)
+ 	{ 	field[i].checked=false;
+	
+	 }
+}
+
+
+
+</script>
+</head>
+
+<body>
+	<form>
+		<input type="checkbox" value="sunday" id="sunday" onclick="check(this)"/>sunday<br/>
+		<input type="checkbox" value="monday" id="monday" onclick="check(this)"/>monday<br/>
+		<input type="checkbox" value="tuesday" id="tuesday" onclick="check(this)"/>tuesday<br/>
+		<input type="checkbox" value="wednesday" id="wednesday" onclick="check(this)"/>wednesday<br/>
+		<input type="checkbox" value="thursday" id="thursday" onclick="check(this)"/>thursday<br/>
+		<input type="checkbox" value="friday" id="friday" onclick="check(this)"/>friday<br/>
+		<input type="checkbox" value="saturday" id="saturday" onclick="check(this)"/>saturday<br/>
+		<input type="checkbox" name="none" value="none" onclick="uncheck()"/>none<br/>
+		
+	</form>
+
+</body>
+</html>

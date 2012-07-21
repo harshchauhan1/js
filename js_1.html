@@ -11,22 +11,24 @@ function check(status) {
       field[i].checked=status;
 
   }
+console.log(document.getElementById('a').childNodes[0]);
+
+}
+function ac(va){
 
 }
 
 </script>
 </head>
-<body>
+<body id='a'>hello
+<input type="checkbox" name="color"/>Red<br/>
+<input type="checkbox" name="color"/>yellow<br/>
+<input type="checkbox" name="color"/>greewn<br/>
+<input type="checkbox" name="color"/>white<br/>
+<input type="checkbox" name="color"/>black<br/>
+<a href="" onclick="check(true); return false;" >Check Checkbox</a>
+<a href="" onclick="check(false); return false;" >Uncheck Checkbox</a>	
 
-	<form>	
-		<input type="checkbox" name="color"/>Red<br/>
-		<input type="checkbox" name="color"/>yellow<br/>
-		<input type="checkbox" name="color"/>greewn<br/>
-		<input type="checkbox" name="color"/>white<br/>
-		<input type="checkbox" name="color"/>black<br/>
-		<a href="" onclick="check(true); return false;" >Check Checkbox</a>
-		<a href="" onclick="check(false); return false;" >Uncheck Checkbox</a>	
-	</form>
 
 	
 
