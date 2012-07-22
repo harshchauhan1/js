@@ -13,7 +13,7 @@ function add(){
 	var input=document.createElement("input");
 	input.id=l+"1";
 	var input1=document.createElement("input");
-	input1.id=l+"s";
+	input1.id=l+"2";
 	var button=document.createElement("input");
 	button.setAttribute('type','button');
 	button.setAttribute('value', 'save');
@@ -29,7 +29,7 @@ function save(row){
 	var rowindex=row.parentNode.parentNode.rowIndex;
 	var cell1data=document.getElementById(rowindex+"1").value;
 	table[rowindex].cells[0].innerHTML=cell1data;
-	var cell2data=document.getElementById(rowindex+"s").value;
+	var cell2data=document.getElementById(rowindex+"2").value;
 	table[rowindex].cells[0].innerHTML=cell1data;
 	table[rowindex].cells[1].innerHTML=cell2data;
 	var edit=document.createElement('a');
@@ -57,7 +57,7 @@ function edit(row1){
 	input.setAttribute('value', cell1data);
 	input1.setAttribute('value', cell2data);
 	input.id=rowindex1+"1";
-	input1.id=rowindex1+"s";
+	input1.id=rowindex1+"2";
 	table[rowindex1].cells[0].innerHTML="";
 	table[rowindex1].cells[0].appendChild(input);
 	table[rowindex1].cells[1].innerHTML="";
