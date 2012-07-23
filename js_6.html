@@ -1,0 +1,29 @@
+<html>
+<head>
+<script type="text/javascript">
+function welcome()
+{
+var x;
+
+var fname=prompt("Please enter your first name");
+var lname=prompt("Please enter your last name");
+
+if(/\S/.test(fname) && /\S/.test(lname))
+{ if(fname!=null && lname!=null)
+	alert("hello"+ fname + "" + lname);
+}
+
+else
+welcome();
+
+}
+</script>
+</head>
+
+<body onload="welcome()">
+
+
+
+
+</body>
+</html>
