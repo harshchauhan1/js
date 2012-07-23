@@ -1,0 +1,74 @@
+<html>
+<head>
+
+<script type="text/javascript">
+
+function selected(check, id1, id2){       
+       
+var a= document.getElementById(id2);
+var b=a.getElementsByTagName("input");
+
+	if(check.checked)
+	{	document.getElementById(id2).style.display="block";
+		for(i=0; i<b.length; i++)
+		{ b[i].checked=true;
+                   } 
+ check.scrollIntoView(true);
+
+}
+		
+	else
+	document.getElementById(id2).style.display="none";
+
+
+}
+
+
+</script>
+</head>
+
+<body>
+
+	<div style="height:100px; overflow:scroll;" id="div1">
+		<ul style="list-style:none;">		
+			<li>
+				<input type="checkbox" id="color" onclick="selected(this, 'color', 'color1')"/>color
+				<ul id="color1" style="list-style:none; display:none">
+					<li><input type="checkbox">red</li>
+					<li><input type="checkbox">blue</li>
+					<li><input type="checkbox">green</li>
+					<li><input type="checkbox">yelow</li>
+				</ul>			
+			</li>
+
+			<li>
+				<input type="checkbox" id="movies" onclick="selected(this, 'movies', 'movies1')">movies
+				<ul style="list-style:none; display:none" id="movies1">
+					<li><input type="checkbox">dar</li>
+					<li><input type="checkbox">sir</li>
+				</ul>			
+			</li>
+
+			<li>
+				<input type="checkbox" id="drinks" onclick="selected(this, 'drinks', 'drinks1')">drinks
+				<ul style="list-style:none; display:none" id="drinks1">
+					<li><input type="checkbox">coke</li>
+					<li><input type="checkbox">pepsi</li>
+					<li><input type="checkbox">dew</li>
+				</ul>
+			</li>
+	
+			<li>
+				<input type="checkbox" id="bikes" onclick="selected(this, 'bikes', 'bikes1')">bikes
+				<ul style="list-style:none; display:none" id="bikes1">
+					<li><input type="checkbox">v-rod</li>
+					<li><input type="checkbox">pulsar</li>
+					<li><input type="checkbox">cbz</li>	
+				</ul>
+			</li>
+		</ul>
+</div>
+
+</body>
+</html>
+
