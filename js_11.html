@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+
+function match_sub() {
+    var url_pattern = /^(https?:\/\/)(([A-z]+)\.)?([A-z]+\.[A-z]{2,4})/;
+    var url = document.getElementById("url").value;
+    url.match(url_pattern);
+    var sub_domain = RegExp.$3;
+
+    if(sub_domain==null || sub_domain.trim()=="")
+    alert("Domain: " +RegExp.$4);
+
+    else
+    alert("Domain: " +RegExp.$4 +",  Subdomain: " +RegExp.$3);
+
+}
+
+</script> 
+
+</head>
+
+
+<body>
+
+	<form>
+		<input type="text" id="url"/>
+		<input type="button" onclick="match_sub()"/>
+	</form>
+</body>
+
+</html>
