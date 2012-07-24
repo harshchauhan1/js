@@ -1,0 +1,135 @@
+<html>
+<head>
+<style type="text/css">
+
+.box{
+	width:350px;
+	background:#ececec;
+	border:solid 1px #bcbcbc;
+	position:relative;
+	right:-350px;
+	padding-left:5px;
+	padding-right:5px;	
+}
+
+.input{
+padding-left:100px;
+}
+
+.labels{
+float:left;
+width:100px;
+padding-right:20px;
+font-weight:bold;
+}
+
+li{
+list-style:none;
+padding-bottom:10px;
+
+}
+
+div{
+padding-bottom:10px;
+}
+</style>
+
+<script type="text/javascript">
+function validate(){
+
+var email=document.getElementById("email").value; 	
+
+if(email==null || email==null)
+{alert("enter email");
+return false;
+}
+
+else{
+var remail= /^([A-Za-z])+(\.?\w+)*@([A-Za-z]{2,}\.){1,2}/;	
+if(!remail.test(email));
+{alert("wrong email format");
+return false;	
+}
+}
+
+var hpage=document.getElementById("homepage").value;
+
+if(hpage==null || hpage==null)
+{alert("enter url");
+return false;
+}
+
+else{
+var rurl= /^(https?:\/\/){1}(www\.)?(\w+\??\/?\.?\-?)+\.[a-z]{2,}\/?/;
+if(!rurl.test(hpage))
+{alert("invalid url");
+ eturn false;
+}
+
+}
+</script>
+</head>
+
+<body>
+
+	
+		<form name="my form" action="" method="get" onsubmit="return validate()">
+		<div class="box">			
+                    
+			<div align="center" style="padding-bottom:10px;">
+				<p style="background:green;">Registration form</p>
+			</div>
+
+                        <div>  
+				<label for="login" class="labels">login id</label>
+			        <input type="text" name="login" id="login"/>
+			</div>
+			
+			<div>
+				<label for="email" class="labels">email</label>
+				<input type="text" name="email" id="email" style="background:yellow;"/>
+			</div>
+
+			<div>
+				<label for="name1" class="labels">name</label>
+				<input type="text" name="name1" id="name" style="background:yellow;"/>
+			</div>
+				
+			<div>	
+				<label for="GMT" class="labels">TIMEZONE</label>
+				<select>
+					<option name="gmt" selected="selected">gmt</option>
+					<option name="gmt">gmt +5:30</option>
+				</select>
+			</div>
+			
+			<div>
+				<label for="email" class="labels">homepage</label>
+				<input type="text" id="homepage" class="textbox"/>
+			</div>
+			<div>
+				<div><label class="labels">ABOUT ME</label></div>	
+				<div><textarea style="height:100px; width:100%;" id="about"></textarea></div>
+			</div>
+			
+
+			
+				<div><input type="checkbox" id="recmail"/>
+				<b>recover emails for notification</b></br>
+				you will be sent an email if anyone comnets on your blog</div>			
+	                        		
+
+			
+				<div align="center">your password will be mailed to you</div>
+			
+		
+
+			<div align="center">
+				<input type="submit" value="go"/>
+			</div>
+		</div>		
+	</form>
+
+
+</body>
+</html>
