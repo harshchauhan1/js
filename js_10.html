@@ -1,0 +1,37 @@
+<html>
+<head>
+
+<script type="text/javascript">
+
+function numcheck() {
+    var text1 = document.getElementById("number").value;
+    if (Number(text1)) {
+        document.getElementById("result").value = "true";
+    } else {
+        document.getElementById("result").value = "false";
+        return false;
+    }
+
+}
+
+
+
+
+
+
+</script>
+
+</head>
+
+
+<body>
+
+	<form>
+		<label for="number">enter number</label>
+		<input type="text" name="number" id="number"/>
+		<label for="result">result</label>
+		<input type="text" name="result" id="result"/><br/>
+		<input type="submit" id="submit" onclick="return numcheck()"/>
+	</form>
+</body>
+</html>

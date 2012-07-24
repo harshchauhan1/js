@@ -43,7 +43,6 @@ if(email==null || email==null)
 {alert("enter email");
 return false;
 }
-
 else{
 var remail= /^([A-Za-z])+(\.?\w+)*@([A-Za-z]{2,}\.){1,2}/;	
 if(!remail.test(email));
@@ -63,7 +62,7 @@ else{
 var rurl= /^(https?:\/\/){1}(www\.)?(\w+\??\/?\.?\-?)+\.[a-z]{2,}\/?/;
 if(!rurl.test(hpage))
 {alert("invalid url");
- eturn false;
+ return false;
 }
 
 }
