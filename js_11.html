@@ -3,7 +3,7 @@
 <script type="text/javascript">
 
 function match_sub() {
-    var url_pattern = /^(https?:\/\/)(([A-z]+)\.)?([A-z]+\.[A-z]{2,4})/;
+    var url_pattern = /^(https?:\/\/)?((([A-z]+)\.)*)([A-z]+\.[A-z]{2,4})$/;
     var url = document.getElementById("url1").value;
     
         if(url.trim()=="")
@@ -14,13 +14,13 @@ function match_sub() {
 	}
 else{
       url.match(url_pattern);
-      var sub_domain = RegExp.$3;
+      var sub_domain = RegExp.$2;
 
       if(sub_domain==null || sub_domain.trim()=="")
-      alert("Domain: " +RegExp.$4);
+      alert("Domain: " +RegExp.$5);
 
       else
-      alert("Domain: " +RegExp.$4 +", Subdomain: " +RegExp.$3);
+      alert("Domain: " +RegExp.$5 +", Subdomain: " +RegExp.$4);
 
     }
 
