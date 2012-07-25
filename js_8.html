@@ -2,37 +2,35 @@
 <head>
 <script type="text/javascript">
 
-function add(id1, id2)
-{	var select1=document.getElementById(id1);
+function add(id1, id2) {
+	var select_first=document.getElementById(id1);
 	var selected=document.getElementById(id1).options;
-	var select2=document.getElementById(id2);
+	var select_second=document.getElementById(id2);
 
-while(selected.selectedIndex>=0)
-{
-	var text1=selected[selected.selectedIndex].text;
-	var option1=document.createElement("option");
-	option1.text=text1;
-	select2.appendChild(option1);
-	select1.removeChild(selected[selected.selectedIndex]);
+	while(selected.selectedIndex>=0) {
+		var select_text=selected[selected.selectedIndex].text;
+ 		var option=document.createElement("option");
+		option.text=select_text;
+		select_second.appendChild(option);
+		select_first.removeChild(selected[selected.selectedIndex]);
+
+	}
 
 }
 
-}
-
-function remove(id1, id2)
-{	var select1=document.getElementById(id1);
+function remove(id1, id2) {
+	var select_first=document.getElementById(id1);
 	var selected=document.getElementById(id1).options;
-	var select2=document.getElementById(id2);
+	var select_second=document.getElementById(id2);
 
-while(selected.selectedIndex>=0)
-{
-	var text1=selected[selected.selectedIndex].text;
-	var option1=document.createElement("option");
-	option1.text=text1;
-	select2.appendChild(option1);
-	select1.removeChild(selected[selected.selectedIndex]);
+	while(selected.selectedIndex>=0) {
+		var select_text=selected[selected.selectedIndex].text;
+ 		var option=document.createElement("option");
+		option.text=select_text;
+		select_second.appendChild(option);
+		select_first.removeChild(selected[selected.selectedIndex]);
 
-}
+	}
 
 }
 
