@@ -3,34 +3,34 @@
 <style type="text/css">
 
 .box{
-width:350px;
-background:#ececec;
-border:solid 1px #bcbcbc;
-position:relative;
-right:-350px;
-padding-left:5px;
-padding-right:5px;	
+	width:350px;
+	background:#ececec;
+	border:solid 1px #bcbcbc;
+	position:relative;
+	right:-350px;
+	padding-left:5px;
+	padding-right:5px;	
 }
 
 .input{
-padding-left:100px;
+	padding-left:100px;
 }
 
 .labels{
-float:left;
-width:100px;
-padding-right:20px;
-font-weight:bold;
+	float:left;
+	width:100px;
+	padding-right:20px;
+	font-weight:bold;
 }
 
 li{
-list-style:none;
-padding-bottom:10px;
+	list-style:none;
+	padding-bottom:10px;
 
 }
 
 div{
-padding-bottom:10px;
+	padding-bottom:10px;
 }
 </style>
 
@@ -38,25 +38,25 @@ padding-bottom:10px;
 
 function validate(form) {
     var input = form.getElementsByTagName("input"), i;
-    for (i = 0; i < (input.length - 2); i++) {
-        var input_text = input[i].value;
-        if (input_text == null || input_text.trim() == "") {
-            alert("form not complete");
-            return false;
-        }
-    }
     var textarea_text = document.getElementById("about").value;
     var textarea_len = document.getElementById("about").value.length;
-
+    for (i = 0; i < input.length; i = i + 1) {
+        if (input[i].type == "text") {
+            var input_text = input[i].value;
+            if (input_text == null || input_text.trim() == "") {
+                alert("form not complete");
+                return false;
+            }
+        } 
+    }
     if ((textarea_text == null || textarea_text.trim() == "") || (textarea_len < 50)) {
-        alert("about me field too short");
-        return false;
+       alert("about me field too short");
+       return false;
     }
-
-    if (!document.getElementById("recmail").checked) {
-        alert("you have not applied for recovery mail");
-        return false;
-    }
+     if (!document.getElementById("recmail").checked) {
+         alert("you have not applied for recovery mail");
+         return false;
+     }
 
 }
 </script>
@@ -118,7 +118,7 @@ function validate(form) {
 
 
 			<div align="center">
-				<input type="submit" value="go"/>
+				<button type="submit">go</button>
 			</div>
 		</div>	
 	</form>
