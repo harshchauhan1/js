@@ -3,22 +3,19 @@
 
 <script type="text/javascript">
 
-function selected(check, id1, id2){       
-       
-var a= document.getElementById(id2);
-var b=a.getElementsByTagName("input");
-
-	if(check.checked)
-	{	document.getElementById(id2).style.display="block";
-		for(i=0; i<b.length; i++)
-		{ b[i].checked=true;
-                   } 
- check.scrollIntoView(true);
-
-}
+function selected(check, id1, id2) {       
+    var a= document.getElementById(id2);
+    var b=a.getElementsByTagName("input");
+    if (check.checked) {
+       document.getElementById(id2).style.display="block";
+       for(i=0; i<b.length; i++) {
+           b[i].checked=true;
+       } 
+       check.scrollIntoView(true);
+    }
 		
-	else
-	document.getElementById(id2).style.display="none";
+    else
+      document.getElementById(id2).style.display="none";
 
 
 }
