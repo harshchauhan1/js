@@ -62,7 +62,7 @@ var url=document.getElementById("homepage").value;
 
 else
 {
-    var url_pattern = /^(https?:\/\/)([A-z]+\.)?([A-z]+\.[A-z]{2,4})/;
+    var url_pattern = /^(https?:\/\/)?(([A-z]+\.)*)([A-z]+\.[A-z]{2,4})$/;
     if(!url_pattern.test(url))
     { alert("invalid url");
       return false;
