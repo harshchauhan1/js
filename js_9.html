@@ -47,14 +47,14 @@ function validate(){
 
    else 
   {  var remail_pattern= /^([A-z])+(\.?\w+)*@[A-z]+(\.[A-z]{2,4}){1,2}/;	
-    if(!email_pattern.test(email))
+    if(!remail_pattern.test(email))
      { alert("wrong email format");
        return false;	
      }
   }
 
 var url=document.getElementById("homepage").value;
-
+console.log(url);
     if(url==null || url.trim()=="")
     { alert("enter url");
       return false;
