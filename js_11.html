@@ -4,29 +4,38 @@
 
 function match_sub() {
     var url_pattern = /^(https?:\/\/)(([A-z]+)\.)?([A-z]+\.[A-z]{2,4})/;
-    var url = document.getElementById("url").value;
-    url.match(url_pattern);
-    var sub_domain = RegExp.$3;
+    var url = document.getElementById("url1").value;
+    
+        if(url.trim()=="")
+	{
+	  alert("empty url");	
+	 return false; 
+	 
+	}
+else{
+      url.match(url_pattern);
+      var sub_domain = RegExp.$3;
 
-    if(sub_domain==null || sub_domain.trim()=="")
-    alert("Domain: " +RegExp.$4);
+      if(sub_domain==null || sub_domain.trim()=="")
+      alert("Domain: " +RegExp.$4);
 
-    else
-    alert("Domain: " +RegExp.$4 +",  Subdomain: " +RegExp.$3);
+      else
+      alert("Domain: " +RegExp.$4 +", Subdomain: " +RegExp.$3);
+
+    }
 
 }
-
-</script> 
+</script>
 
 </head>
 
 
 <body>
 
-	<form>
-		<input type="text" id="url"/>
-		<input type="button" onclick="match_sub()"/>
-	</form>
+<form  onsubmit="return match_sub()">
+<input type="text" id="url1"/>
+<input type="submit"/>
+</form>
 </body>
 
 </html>
