@@ -36,38 +36,30 @@ padding-bottom:10px;
 
 <script type="text/javascript">
 
-function validate(){
-
-    var email=document.getElementById("email").value; 	
-
-    if(email==null || email.trim()=="")
-     { alert("enter email");
-       return false;
-     }
-
-   else 
-  {  var remail_pattern= /^([A-z])+(\.?\w+)*@[A-z]+(\.[A-z]{2,4}){1,2}/;	
-    if(!remail_pattern.test(email))
-     { alert("wrong email format");
-       return false;	
-     }
-  }
-
-var url=document.getElementById("homepage").value;
-console.log(url);
-    if(url==null || url.trim()=="")
-    { alert("enter url");
-      return false;
+function validate() {
+    var email = document.getElementById("email").value;
+    if (email === null || email.trim() === "") {
+        alert("enter email");
+        return false;
+    } else {
+        var remail_pattern = /^([A-z])+(\.?\w+)*@[A-z]+(\.[A-z]{2,4}){1,2}/;
+        if (!remail_pattern.test(email)) {
+            alert("wrong email format");
+            return false;
+        }
     }
-
-else
-{
-    var url_pattern = /^(https?:\/\/)?(([A-z]+\.)*)([A-z]+\.[A-z]{2,4})$/;
-    if(!url_pattern.test(url))
-    { alert("invalid url");
-      return false;
+    var url = document.getElementById("homepage").value;
+    console.log(url);
+    if (url === null || url.trim() === "") {
+        alert("enter url");
+        return false;
+    } else {
+        var url_pattern = /^(https?:\/\/)?(([A-z]+\.)*)([A-z]+\.[A-z]{2,4})$/;
+        if (!url_pattern.test(url)) {
+            alert("invalid url");
+            return false;
+        }
     }
-}
 
 }
 </script>
