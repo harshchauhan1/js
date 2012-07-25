@@ -36,29 +36,27 @@ padding-bottom:10px;
 
 <script type="text/javascript">
 
-function validate(form1) {
-    var a = form1.getElementsByTagName("input");
-    console.log(a.length);
-    for(i=0; i<(a.length-2); i++)
-    {   var text=a[i].value;
-        if(text==null || text.trim()=="")
-        {  alert("form not complete");
-      return false;
+function validate(form) {
+    var input = form.getElementsByTagName("input"), i;
+    for (i = 0; i < (input.length - 2); i++) {
+        var input_text = input[i].value;
+        if (input_text == null || input_text.trim() == "") {
+            alert("form not complete");
+            return false;
         }
     }
+    var textarea_text = document.getElementById("about").value;
+    var textarea_len = document.getElementById("about").value.length;
 
-var text1=document.getElementById("about").value;
-var len=document.getElementById("about").value.length;
+    if ((textarea_text == null || textarea_text.trim() == "") || (textarea_len < 50)) {
+        alert("about me field too short");
+        return false;
+    }
 
-if((text1==null||text1.trim()=="") || (len<50))
-{	alert("about me field too short");
-  return false;
-}
-
-if(!document.getElementById("recmail").checked)
-{	alert("you have not applied for recovery mail");
-return false;
-}
+    if (!document.getElementById("recmail").checked) {
+        alert("you have not applied for recovery mail");
+        return false;
+    }
 
 }
 </script>
