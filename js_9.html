@@ -37,30 +37,34 @@ padding-bottom:10px;
 <script type="text/javascript">
 
 function validate() {
+    if (!validate_email()) {
+        alert("enter correct email");
+	    return false;
+    }
+    if (!validate_url()) {
+        alert("enter correct url");
+	    return false;
+    }
+}
+
+function validate_email() {
     var email = document.getElementById("email").value;
     if (email === null || email.trim() === "") {
-        alert("enter email");
         return false;
     } else {
         var remail_pattern = /^([A-z])+(\.?\w+)*@[A-z]+(\.[A-z]{2,4}){1,2}/;
-        if (!remail_pattern.test(email)) {
-            alert("wrong email format");
-            return false;
-        }
+        return (remail_pattern.test(email));
     }
+}
+
+function validate_url() {
     var url = document.getElementById("homepage").value;
-    console.log(url);
     if (url === null || url.trim() === "") {
-        alert("enter url");
         return false;
     } else {
         var url_pattern = /^(https?:\/\/)?(([A-z]+\.)*)([A-z]+\.[A-z]{2,4})$/;
-        if (!url_pattern.test(url)) {
-            alert("invalid url");
-            return false;
-        }
+        return (url_pattern.test(url));
     }
-
 }
 </script>
 </head>
