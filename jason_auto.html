@@ -2,21 +2,23 @@
 <head>
 <style type="text/css">
 
-.back {
-
+ul {
+	display:none;
+	list-style:none;
+	margin-left:1.5px;
+	margin-top:-03.5px;
+	width:134px;
+	border:solid 1px black;
+	position:absolute;
 }
 
-a {
-text-decoration:none;
-color:black;
+li:hover{
+	background:cyan;
 }
 
-div {
-width:100px;
-}
-
-a:hover {
-background:grey;
+li {
+	margin-left:-40px;
+	cursor:pointer;
 }
 
 </style>
@@ -45,28 +47,25 @@ var users = [{"name":"Luigi Damiano"},
 {"name":"Rick Olson"}]
 
 function check() {
-initial_var = setInterval(function() {string_match()},200);
+    initial_var = setInterval(function () {string_match()}, 200);
 }
 
 function string_match() {
-    var text = document.getElementById("name").value;
+    var text = document.getElementById("name").value, i;
     document.getElementById("sublist").innerHTML = "";
-
-    for(var i = 0; i<users.length; i++) {
-        var pattern = new RegExp("^"+text);
-    
+    for (i = 0; i < users.length; i = i + 1) {
+        var pattern = new RegExp("^" + text);
         if (users[i].name.toLowerCase().match(pattern)) {
-            document.getElementById("sublist").style.display = "block"
-            document.getElementById("sublist").innerHTML += "<a href=# onclick='print(this)' class = 'back'>"+users[i].name+"</a><br/>";
+            document.getElementById("sublist").style.display = "block";
+            document.getElementById("sublist").innerHTML += "<li onclick='print(this)'>" + users[i].name + "</li>";
         }
-    }      
+    }
 }
 
 function print(element) {
-console.log(element.innerText);
     document.getElementById("name").value = element.innerText;
     document.getElementById("sublist").innerHTML = "";
-document.getElementById("sublist").style.display = "none";
+    document.getElementById("sublist").style.display = "none";
 }
 
 </script>
@@ -78,9 +77,9 @@ document.getElementById("sublist").style.display = "none";
 
 	<div>	
 		<input type="text" id="name" onkeydown="check()"/></div>
-		<div id="sublist" style="width:175px; border:solid 1px black; margin-top:-2px; display:none;">
+		<ul id="sublist">
                      
-		</div>
+		</ul>
 	</ul>
 		
 	
