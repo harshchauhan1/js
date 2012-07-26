@@ -39,17 +39,17 @@ div{
 function validate(form) {
     var input = form.getElementsByTagName("input"), i;
     var textarea_text = document.getElementById("about").value;
-    var textarea_len = document.getElementById("about").value.length;
+    var textarea_len = textarea_text.length;
     for (i = 0; i < input.length; i = i + 1) {
         if (input[i].type == "text") {
             var input_text = input[i].value;
-            if (input_text == null || input_text.trim() == "") {
+            if (input_text.trim() == "") {
                 alert("form not complete");
                 return false;
             }
         } 
     }
-    if ((textarea_text == null || textarea_text.trim() == "") || (textarea_len < 50)) {
+    if ((textarea_text.trim() == "") || (textarea_len < 50)) {
        alert("about me field too short");
        return false;
     }
