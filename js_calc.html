@@ -1,0 +1,157 @@
+<html>
+<head>
+
+<style type="text/css">
+
+tr {
+	padding-bottom:25px;
+}
+
+td {
+	width:10px;
+}
+
+.button {
+        width:40px;
+}
+
+.box{
+align:center;
+background:grey;
+width:185px;
+}
+</style>
+
+<script type="text/javascript">
+var new_num = true;
+var accumulate = 0;
+var pendigop = "";
+var form = document.getElementById("myform");
+var memory_value = 0;
+function numpress(num) {
+    var num_value = num.value;
+    if (new_num) {
+        document.getElementById("screen").value = num_value;
+        new_num = false;
+    } else {
+        document.getElementById("screen").value+=num_value;
+    }
+}
+
+function operation(op) {
+    var value = document.getElementById("screen").value;
+    var op_value = op.value;
+    if (new_num && pendigop != "=");
+    else {
+      new_num = true;
+      if (pendigop == "+")
+          accumulate += parseFloat(value);
+      else if (pendigop == "-")
+          accumulate -= parseFloat(value);
+      else if (pendigop == "/")
+          accumulate /= parseFloat(value);
+      else if (pendigop == "*")
+          accumulate *= parseFloat(value);
+      else
+          accumulate = parseFloat(value);
+          pendigop = op_value;
+          document.getElementById("screen").value = accumulate;
+     }
+}
+   
+function decimal() {
+    var curr_value = document.getElementById("screen").value;
+    if (new_num) {
+        curr_value = "0.";
+        new_num = false;
+    } else {
+        if (curr_value.indexOf(".") == -1)
+            curr_value += ".";
+      }
+    document.getElementById("screen").value = curr_value;
+}
+
+function clear_screen() {
+    accumulate = 0;
+    pendigop = "";
+    document.getElementById("screen").value = "0";
+    new_num = true;
+}
+
+function neg() {
+    document.getElementById("screen").value = parseFloat(document.getElementById("screen").value) * -1;
+}
+
+function memory_add() {
+    memory_value += parseFloat(document.getElementById("screen").value);
+}
+
+function memory_sub() {
+    memory_value -= parseFloat(document.getElementById("screen").value);
+}
+
+function result() {
+    document.getElementById("screen").value = memory_value;
+}
+
+function memory_clear() {
+    memory_value = 0;
+}
+</script>
+
+</head>
+
+
+
+<body>
+   <form class="box" id="myform">
+	<table>
+		<tr>
+			<td colspan="4" align="middle"><input type="text" id="screen" value="0" disabled="disabled" style="height:50px;"/></td>
+		</tr>
+        
+		<tr>
+			<td><input type="button" id="mc" value="MC" class="button" onclick="memory_clear()"/></td>
+			<td><input type="button" id="m+" value="M+" class="button" onclick="memory_add()";/></td>
+			<td><input type="button" id="m-" value="M-" class="button" onclick="memory_sub()"/></td>
+			<td><input type="button" id="mr" value="MR" class="button" onclick="result()"/></td>
+		</tr>
+
+		<tr>
+			<td><input type="button" id="c" value="C" class="button" onclick="clear_screen()"/></td>
+			<td><input type="button" id="add_sub" value="+-" class="button" onclick="neg()"/></td>
+			<td><input type="button" id="divide" value="/" class="button" onclick="operation(this)"/></td>
+			<td><input type="button" id="mul" value="*" class="button" onclick="operation(this)"/></td>
+  		</tr>
+
+		<tr>
+			<td><input type="button" id="7" value="7" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="8" value="8" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="9" value="9" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="sub" value="-" class="button" onclick="operation(this)"/></td>
+  		</tr>
+
+		<tr>
+			<td><input type="button" id="6" value="6" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="5" value="5" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="4" value="4" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="add" value="+" class="button" onclick="operation(this)"/></td>
+  		</tr>
+
+		<tr>
+			<td><input type="button" id="3" value="3" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="2" value="2" class="button" onclick="numpress(this)"/></td>
+			<td><input type="button" id="1" value="1" class="button" onclick="numpress(this)"/></td>
+			<td rowspan="2"><input type="button" id="equal" value="=" class="button" onclick="operation(this)" 				style="height:50px;"/></td>
+  		</tr>
+
+		<tr>
+			<td colspan="2"><input type="button" id="0" value="0" style="width:85px;"onclick="numpress(this)"/></td>
+			<td><input type="button" id="dot" value="." class="button" onclick="decimal()"/></td>
+			
+  		</tr>			
+			
+	</table>
+	</form>		
+</body>
+</html>
