@@ -1,0 +1,91 @@
+<html>
+<head>
+<style type="text/css">
+
+.back {
+
+}
+
+a {
+text-decoration:none;
+color:black;
+}
+
+div {
+width:100px;
+}
+
+a:hover {
+background:grey;
+}
+
+</style>
+<script type="text/javascript">
+var users = [{"name":"Luigi Damiano"},
+{"name":"Zenith Coboro"},
+{"name":"Zig Ziglar"},
+{"name":"Steve Costner"},
+{"name":"Bill Grazer"},
+{"name":"Timothy Frazer"},
+{"name":"Boris Becker"},
+{"name":"Glenn Gladwich"},
+{"name":"Jim Jackson"},
+{"name":"Aaron Kabin"},
+{"name":"Roy Goldwin"},
+{"name":"Jason Goldberg"},
+{"name":"Tim Ferris"},
+{"name":"Buck Singham"},
+{"name":"Malcom Gladwell"},
+{"name":"Joy Rabura"},
+{"name":"Vid Luther"},
+{"name":"Tom Glicken"},
+{"name":"Ray Baxter"},
+{"name":"Ari Kama"},
+{"name":"Kenichi Suzuki"},
+{"name":"Rick Olson"}]
+
+function check() {
+initial_var = setInterval(function() {string_match()},200);
+}
+
+function string_match() {
+    var text = document.getElementById("name").value;
+    document.getElementById("sublist").innerHTML = "";
+
+    for(var i = 0; i<users.length; i++) {
+        var pattern = new RegExp("^"+text);
+    
+        if (users[i].name.toLowerCase().match(pattern)) {
+            document.getElementById("sublist").style.display = "block"
+            document.getElementById("sublist").innerHTML += "<a href=# onclick='print(this)' class = 'back'>"+users[i].name+"</a><br/>";
+        }
+    }      
+}
+
+function print(element) {
+console.log(element.innerText);
+    document.getElementById("name").value = element.innerText;
+    document.getElementById("sublist").innerHTML = "";
+document.getElementById("sublist").style.display = "none";
+}
+
+</script>
+</head>
+
+
+
+<body>
+
+	<div>	
+		<input type="text" id="name" onkeydown="check()"/></div>
+		<div id="sublist" style="width:175px; border:solid 1px black; margin-top:-2px; display:none;">
+                     
+		</div>
+	</ul>
+		
+	
+	
+</body>
+		
+
+
