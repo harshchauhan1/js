@@ -2,79 +2,76 @@
 <head>
 
 <script type="text/javascript">
-
-function add(){
-	table=document.getElementById("tab").rows;
-	var l=table.length;
-	var row=document.getElementById("tab").insertRow(-1);
-	cell1=row.insertCell(0);
-	cell2=row.insertCell(1);
-	cell3=row.insertCell(2);
-	var input=document.createElement("input");
-	input.id=l+"1";
-	var input1=document.createElement("input");
-	input1.id=l+"2";
-	var button=document.createElement("input");
-	button.setAttribute('type','button');
-	button.setAttribute('value', 'save');
-	button.setAttribute('onclick','save(this)');
-	
-	cell1.appendChild(input);
-	cell2.appendChild(input1);
-	cell3.appendChild(button);
-	
+count=0;
+function add() {
+    count++;
+    table = document.getElementById("tab").rows;
+    len = table.length;
+    var row = document.getElementById("tab").insertRow(-1);
+    row.id = count;
+    cell1 = row.insertCell(0);
+    cell2 = row.insertCell(1);
+    cell3 = row.insertCell(2);
+    var input = document.createElement("input");
+    input.id = len + "1";
+    var input1 = document.createElement("input");
+    input1.id = len + "2";
+    var button = document.createElement("input");
+    button.setAttribute('type', 'button');
+    button.setAttribute('value', 'save');
+    button.setAttribute('onclick', 'save(this, ' + count + ')');
+    cell1.appendChild(input);
+    cell2.appendChild(input1);
+    cell3.appendChild(button);
+    console.log(row.id);
 }
-
-function save(row){
-	var rowindex=row.parentNode.parentNode.rowIndex;
-	var cell1data=document.getElementById(rowindex+"1").value;
-	table[rowindex].cells[0].innerHTML=cell1data;
-	var cell2data=document.getElementById(rowindex+"2").value;
-	table[rowindex].cells[0].innerHTML=cell1data;
-	table[rowindex].cells[1].innerHTML=cell2data;
-	var edit=document.createElement('a');
-	edit.innerHTML="edit";
-	edit.setAttribute('href','#');
-	edit.setAttribute('onclick','edit(this)');
-	var delete1=document.createElement('a');
-	delete1.innerHTML="Delete";
-	delete1.setAttribute('href','#');
-	delete1.setAttribute('onclick','delete1(this)');
-	table[rowindex].cells[2].innerHTML="";
-	var text=document.createTextNode(" / ");
-	table[rowindex].cells[2].appendChild(edit);
-	table[rowindex].cells[2].appendChild(text);
-	table[rowindex].cells[2].appendChild(delete1);
-
+function save(button, row) {
+    console.log(row);
+    var rowindex = document.getElementById(row).rowIndex;
+    var cell1data = document.getElementById(rowindex + "1").value;
+    table[rowindex].cells[0].innerHTML = cell1data;
+    var cell2data = document.getElementById(rowindex + "2").value;
+    table[rowindex].cells[0].innerHTML = cell1data;
+    table[rowindex].cells[1].innerHTML = cell2data;
+    var edit = document.createElement('a');
+    edit.innerHTML = "edit";
+    edit.setAttribute('href', '#');
+    edit.setAttribute('onclick', 'edit(' + row + ')');
+    var delete1 = document.createElement('a');
+    delete1.innerHTML = "Delete";
+    delete1.setAttribute('href', '#');
+    delete1.setAttribute('onclick', 'delete1(' + row + ')');
+    button.style.display = "none";
+    var text = document.createTextNode(" / ");
+    table[rowindex].cells[2].appendChild(edit);
+    table[rowindex].cells[2].appendChild(text);
+    table[rowindex].cells[2].appendChild(delete1);
 }
-
-function edit(row1){
-	var rowindex1=row1.parentNode.parentNode.rowIndex;
-	var input=document.createElement("input");
-	var cell1data=table[rowindex1].cells[0].innerHTML;
-	var input1=document.createElement("input");
-	var cell2data=table[rowindex1].cells[1].innerHTML;
-	input.setAttribute('value', cell1data);
-	input1.setAttribute('value', cell2data);
-	input.id=rowindex1+"1";
-	input1.id=rowindex1+"2";
-	table[rowindex1].cells[0].innerHTML="";
-	table[rowindex1].cells[0].appendChild(input);
-	table[rowindex1].cells[1].innerHTML="";
-	table[rowindex1].cells[1].appendChild(input1);
-	var button=document.createElement("input");
-	button.setAttribute('type','button');
-	button.setAttribute('value', 'update');
-	button.setAttribute('onclick','save(this)');
-	table[rowindex1].cells[2].innerHTML="";
-	table[rowindex1].cells[2].appendChild(button);
+function edit(row) {
+    var rowindex = document.getElementById(row).rowIndex;
+    var input = document.createElement("input");
+    var cell1data = table[rowindex].cells[0].innerHTML;
+    var input1 = document.createElement("input");
+    var cell2data = table[rowindex].cells[1].innerHTML;
+    input.setAttribute('value', cell1data);
+    input1.setAttribute('value', cell2data);
+    input.id = rowindex + "1";
+    input1.id = rowindex + "2";
+    table[rowindex].cells[0].innerHTML = "";
+    table[rowindex].cells[0].appendChild(input);
+    table[rowindex].cells[1].innerHTML = "";
+    table[rowindex].cells[1].appendChild(input1);
+    var button = document.createElement("input");
+    button.setAttribute('type', 'button');
+    button.setAttribute('value', 'update');
+    button.setAttribute('onclick', 'save(this ,' + row + ')');
+    table[rowindex].cells[2].innerHTML = "";
+    table[rowindex].cells[2].appendChild(button);
 }
-
-function delete1(row2)
-{	row2.parentNode.parentNode.innerHTML="";
-
+function delete1(row) {
+    console.log(row);
+    document.getElementById("tab").deleteRow(document.getElementById(row).rowIndex);
 }
-
 </script>
 </head>
 
