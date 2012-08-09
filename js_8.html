@@ -2,49 +2,28 @@
 <head>
 <script type="text/javascript">
 
-function add(id1, id2) {
-	var select_first=document.getElementById(id1);
-	var selected=document.getElementById(id1).options;
-	var select_second=document.getElementById(id2);
+function move (source, target) {
+	var select_first = document.getElementById(source);
+	var selected = document.getElementById(source).options;
+	var select_second = document.getElementById(target);
 
-	while(selected.selectedIndex>=0) {
-		var select_text=selected[selected.selectedIndex].text;
- 		var option=document.createElement("option");
-		option.text=select_text;
+	while (selected.selectedIndex >= 0) {
+		var select_text = selected[selected.selectedIndex].text;
+ 		var option = document.createElement("option");
+		option.text = select_text;
 		select_second.appendChild(option);
 		select_first.removeChild(selected[selected.selectedIndex]);
-
 	}
-
 }
-
-function remove(id1, id2) {
-	var select_first=document.getElementById(id1);
-	var selected=document.getElementById(id1).options;
-	var select_second=document.getElementById(id2);
-
-	while(selected.selectedIndex>=0) {
-		var select_text=selected[selected.selectedIndex].text;
- 		var option=document.createElement("option");
-		option.text=select_text;
-		select_second.appendChild(option);
-		select_first.removeChild(selected[selected.selectedIndex]);
-
-	}
-
-}
-
-
 </script>
-</style>
 </head>
 
 <body>
 
 
-<div align="center">
-	<div style="width:300px; float:left;">
-		<select size="5" id="box1" multiple="multiple">
+<div align="center" style="margin:auto; display:black; width:500px;">
+	<div style="float:left;">
+		<select size="5" id="box1" multiple="multiple" style="width:100px;">
 			<option id="australia">australia</option>
 			<option id="egypt">egypt</option>
 			<option id="france">france</option>
@@ -54,13 +33,13 @@ function remove(id1, id2) {
 		</select>	
 	</div>
 
-	<div style="width:200px; float:left;">
-		<input type="button" id="add" value="add" onclick="add('box1', 'box2')"/><br/>
-		<input type="button" id="remove" value="remove" onclick="remove('box2', 'box1')"/>
+	<div style="width:100px; float:left;">
+		<input type="button" id="add" value="add" onclick="move('box1', 'box2')"/><br/>
+		<input type="button" id="remove" value="remove" onclick="move('box2', 'box1')"/>
 	</div>
 
-	<div style="width:300px; float:left;">
-		<select size="5" id="box2"  multiple="multiple">
+	<div style="float:left;">
+		<select size="5" id="box2"  multiple="multiple" style="width:100px;">
 
 		</select>	
 

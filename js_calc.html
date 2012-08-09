@@ -45,20 +45,36 @@ function operation(op) {
     else {
       new_num = true;
       if (pendigop == "+")
-          accumulate += parseFloat(value);
+          add(value);
       else if (pendigop == "-")
-          accumulate -= parseFloat(value);
+          sub(value);
       else if (pendigop == "/")
-          accumulate /= parseFloat(value);
+          div(value);
       else if (pendigop == "*")
-          accumulate *= parseFloat(value);
+          mul(value);
       else
           accumulate = parseFloat(value);
           pendigop = op_value;
-          document.getElementById("screen").value = accumulate;
+          document.getElementById("screen").value = accumulate;      
      }
 }
-   
+function add (value) {
+    accumulate += parseFloat(value);
+    return value;
+}
+function sub (value) {
+    accumulate -= parseFloat(value);
+    return value;
+}
+function div (value) {
+    accumulate /= parseFloat(value);
+    return value;
+}
+function mul (value) {
+    accumulate *= parseFloat(value);
+    return value;
+}
+
 function decimal() {
     var curr_value = document.getElementById("screen").value;
     if (new_num) {
@@ -79,15 +95,18 @@ function clear_screen() {
 }
 
 function neg() {
-    document.getElementById("screen").value = parseFloat(document.getElementById("screen").value) * -1;
+    var value = document.getElementById("screen").value;
+    document.getElementById("screen").value = parseFloat(value * -1);
 }
 
 function memory_add() {
-    memory_value += parseFloat(document.getElementById("screen").value);
+    var value = document.getElementById("screen").value;
+    memory_value += parseFloat(value);
 }
 
 function memory_sub() {
-    memory_value -= parseFloat(document.getElementById("screen").value);
+    var value = document.getElementById("screen").value;
+    memory_value -= parseFloat(value);
 }
 
 function result() {
