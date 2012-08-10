@@ -1,0 +1,238 @@
+<html>
+<head>
+
+<style type= "text/css">
+
+.box {
+padding:2px;
+width:800px;
+height:600px;
+border:solid 1px black;
+background-color:grey;
+}
+
+.header ul {
+list-style:none;
+}
+
+
+
+.header li {
+padding:20px;
+background:blue;
+margin:5px;
+float:left;
+}
+
+.footer{
+width:796;
+height:50px;
+border:solid 1px black;
+position:absolute;
+top:561px;
+text-align:right;
+}
+
+button {
+-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.rows {
+border-bottom:solid 1px black;
+background:grey;
+}
+
+a {
+color:black;
+cursor:pointer;
+}
+
+#content { 
+position:absolute;
+top:100px;
+background-color:white;
+width:796px;
+height:460px;
+overflow:auto;
+}
+
+#total {
+height:30px;
+width:70px;
+}
+
+
+</style>
+
+
+<script type="text/javascript">
+var products = [
+{"id":"1", "title":"Apple Macbook Pro", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2299.99", "image":"http://dl.dropbox.com/u/88337953/images1.jpeg", "quantity":"0" },
+{"id":"1", "title":"Sony VAIO", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2699.99", "image":"http://dl.dropbox.com/u/88337953/images2.jpeg", "quantity":"0" },
+{"id":"1", "title":"Canon Digital Rebel XT", "category":"Camera", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"550", "image":"http://dl.dropbox.com/u/88337953/images.jpeg", "quantity":"0" }
+];
+var cart_products = {};
+var total = 0;
+var count =100;
+function create_products() { 
+    document.getElementById("product").style.display="block";
+    document.getElementById("cart").style.display="none";
+    for (var i = 0; i < 3; i++) {
+    var row = document.getElementById("products").insertRow(-1);
+    row.className = "rows";
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    row.className= "rows";
+    row.id = i;
+    var img = document.createElement('img');
+    img.src = products[i].image;
+    cell1.appendChild(img);
+    var name = document.createElement('p');
+    name.innerHTML = products[i].title;
+    cell2.appendChild(name);
+    var category = document.createElement('p');
+    category.innerHTML = "category: " +products[i].category;
+    cell2.appendChild(category);
+    var info = document.createElement('p');
+    info.innerHTML = products[i].info;
+    cell2.appendChild(info);
+    var price = document.createElement('p');
+    price.innerHTML = "price: " + products[i].price;
+    cell2.appendChild(price);
+    var quantity = document.createElement('input');
+    quantity.type = 'text';
+    quantity.style.width = "40px";
+    quantity.value = products[i].quantity;
+    var label = document.createElement('label');
+    label.innerText = "quantity";
+    cell3.appendChild(label);
+    cell3.appendChild(quantity);
+    quantity.id = i + "q";
+    var button = document.createElement('input');
+    button.type = 'button';
+    button.value = 'ADD TO CART';
+    button.setAttribute('onclick', 'add(' + i + ')');
+    cell4.appendChild(button);
+    }
+}
+function view_cart() { 
+    document.getElementById("product").style.display="none";
+    document.getElementById("cart").style.display="block";
+    
+}
+function view_products() {
+    document.getElementById("cart").style.display="none";
+    document.getElementById("product").style.display="block";
+    
+}
+
+function add (id) {	var table = document.getElementById("carts").rows; 
+     if(!cart_products[id]) {
+     var temp = products[id];
+     cart_products [id] = { "id" : temp["id"], "quantity" : document.getElementById(id + "q").value, "title" : temp["title"], "image" : temp  		["image"], "price" : temp["price"]  };
+    document.getElementById("carts").delete;
+    var row = document.getElementById("carts").insertRow(-1);
+    count--;
+    row.name = "product1";
+    row.className = "rows";
+    row.id = count;
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var img = document.createElement('img');
+    img.src = products[id].image;
+    cell1.appendChild(img);
+    var name = document.createElement('p');
+    name.innerHTML = cart_products[id].title;
+    cell1.appendChild(name);
+    var price = document.createElement('p');
+    price.innerHTML = cart_products[id].price;
+    cell2.appendChild(price);
+    var quantity = document.createElement('input');
+    quantity.type = 'text';
+    quantity.style.width = "40px";
+    quantity.value = cart_products[id].quantity;
+    quantity.id = id + "s";
+    cell3.appendChild(quantity);
+    var subtotal = document.createElement('p');
+    subtotal.innerHTML = cart_products[id].quantity*cart_products[id].price;
+    subtotal.id = id + "t";
+    cell4.appendChild(subtotal);
+    total += cart_products[id].quantity*cart_products[id].price;
+    var button = document.createElement('input');
+    button.type = 'button';
+    button.value = 'remove';
+    button.setAttribute('onclick', 'row_rem(' + row.id + ',' + id + ')');
+    cell5.appendChild(button);
+    } else { 
+        total -= cart_products[id].quantity*cart_products[id].price;
+        cart_products[id].quantity = document.getElementById(id + "q").value;
+        document.getElementById(id + "s").value = cart_products[id].quantity;
+        document.getElementById(id + "t").innerHTML = cart_products[id].quantity*cart_products[id].price; 
+        total += cart_products[id].quantity*cart_products[id].price;
+   }
+    calc_total(total);
+    cart_rows = table.length-1;
+    document.getElementById("my_cart").innerHTML = "my cart (" + cart_rows + ")";
+}
+function row_rem(row_id, id) {
+    document.getElementById("carts").deleteRow(document.getElementById(row_id).rowIndex);
+    total -= cart_products[id].price*cart_products[id].quantity;
+    delete cart_products[id];
+    calc_total(total);
+    cart_rows--;
+    document.getElementById("my_cart").innerHTML = "my cart (" + cart_rows + ")";
+}
+function calc_total (total) {
+    document.getElementById("total").value = total; 
+}
+
+</script>
+</head>
+<body onload="create_products()">
+	<div class="box" id="box">
+		<div class="header" id="header">
+			<ul>
+  				<li  onclick="view_products()"><a >PRODUCTS</a></li>
+				<li onclick="view_cart()"><a id="my_cart">my cart (0)</a></li>
+			</ul>
+		</div><br/>
+		<div id="content">
+			<div>
+				search:<input type="text"/>
+				<button>search</button>
+				<button>clear</button>
+  				category:<select>
+						<option>all</option>
+                                         </select>
+			</div>
+			<div id="product">
+				<table id="products">
+			 	</table>
+			</div>
+                	<div id="cart">
+                       		<table id="carts">
+					<th>products</th>
+					<th>price</th>
+					<th>quantity</th>
+					<th>subtotal</th>
+					<th></th>
+				</table>
+                	</div>
+                </div>
+   		<div class="footer">
+			Total:<input type="text" id="total" disabled/>
+   			<button id="checkout">checkout</button>
+		</div>
+		
+	</div>
+
+
+</body>
+</html>
+			
