@@ -34,24 +34,33 @@ function numpress(num) {
         document.getElementById("screen").value = num_value;
         new_num = false;
     } else {
-        document.getElementById("screen").value+=num_value;
+        document.getElementById("screen").value += num_value;
     }
+count = 0;
 }
 
 function operation(op) {
     var value = document.getElementById("screen").value;
+    count++;
     var op_value = op.value;
+    if (count >= 2) {
+        pendigop = op_value;
+    }
     if (new_num && pendigop != "=");
     else {
       new_num = true;
-      if (pendigop == "+")
+      if (pendigop == "+") {
           add(value);
-      else if (pendigop == "-")
-          sub(value);
-      else if (pendigop == "/")
+      }
+      else if (pendigop == "-") {
+          sub(value);          
+      }
+      else if (pendigop == "/") {
           div(value);
-      else if (pendigop == "*")
+      }
+      else if (pendigop == "*") {
           mul(value);
+      }
       else
           accumulate = parseFloat(value);
           pendigop = op_value;
@@ -60,18 +69,22 @@ function operation(op) {
 }
 function add (value) {
     accumulate += parseFloat(value);
+    count = 0;    
     return value;
 }
 function sub (value) {
     accumulate -= parseFloat(value);
+    count = 0;
     return value;
 }
 function div (value) {
     accumulate /= parseFloat(value);
+    count = 0;
     return value;
 }
 function mul (value) {
     accumulate *= parseFloat(value);
+    count = 0;
     return value;
 }
 
@@ -85,6 +98,7 @@ function decimal() {
             curr_value += ".";
       }
     document.getElementById("screen").value = curr_value;
+    count = 0;
 }
 
 function clear_screen() {
@@ -92,29 +106,35 @@ function clear_screen() {
     pendigop = "";
     document.getElementById("screen").value = "0";
     new_num = true;
+    count = 0;
 }
 
 function neg() {
     var value = document.getElementById("screen").value;
     document.getElementById("screen").value = parseFloat(value * -1);
+    count = 0;
 }
 
 function memory_add() {
     var value = document.getElementById("screen").value;
     memory_value += parseFloat(value);
+    count = 0;
 }
 
 function memory_sub() {
     var value = document.getElementById("screen").value;
     memory_value -= parseFloat(value);
+    count = 0;
 }
 
 function result() {
     document.getElementById("screen").value = memory_value;
+    count = 0;
 }
 
 function memory_clear() {
     memory_value = 0;
+    count = 0;
 }
 </script>
 
@@ -126,7 +146,7 @@ function memory_clear() {
    <form class="box" id="myform">
 	<table>
 		<tr>
-			<td colspan="4" align="middle"><input type="text" id="screen" value="0" disabled="disabled" style="height:50px;"/></td>
+			<td colspan="4" align="middle"><input type="text" id="screen" value="0" disabled="disabled" style="height:50px; text-align:right;"/></td>
 		</tr>
         
 		<tr>
@@ -165,7 +185,7 @@ function memory_clear() {
   		</tr>
 
 		<tr>
-			<td colspan="2"><input type="button" id="0" value="0" style="width:85px;"onclick="numpress(this)"/></td>
+			<td colspan="2"><input type="button" id="0" value="0" class="button"style="width:85px;"onclick="numpress(this)"/></td>
 			<td><input type="button" id="dot" value="." class="button" onclick="decimal()"/></td>
 			
   		</tr>			
