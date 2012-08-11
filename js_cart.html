@@ -20,7 +20,7 @@ list-style:none;
 .header li {
 padding:20px;
 background:blue;
-margin:5px;
+margin:2px;
 float:left;
 }
 
@@ -62,6 +62,10 @@ height:30px;
 width:70px;
 }
 
+td {
+width:200px;
+}
+
 
 </style>
 
@@ -72,50 +76,50 @@ var products = [
 {"id":"1", "title":"Sony VAIO", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2699.99", "image":"http://dl.dropbox.com/u/88337953/images2.jpeg", "quantity":"0" },
 {"id":"1", "title":"Canon Digital Rebel XT", "category":"Camera", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"550", "image":"http://dl.dropbox.com/u/88337953/images.jpeg", "quantity":"0" }
 ];
-var cart_products = {};
+var cart_items = {};
 var total = 0;
-var count =100;
+var count = 100;
 function create_products() { 
-    document.getElementById("product").style.display="block";
-    document.getElementById("cart").style.display="none";
+    document.getElementById("product").style.display = "block";
+    document.getElementById("cart").style.display = "none";
     for (var i = 0; i < 3; i++) {
     var row = document.getElementById("products").insertRow(-1);
     row.className = "rows";
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
+    var column_img = row.insertCell(0);
+    var column_info = row.insertCell(1);
+    var column_quantity = row.insertCell(2);
+    var column_action = row.insertCell(3);
     row.className= "rows";
     row.id = i;
     var img = document.createElement('img');
     img.src = products[i].image;
-    cell1.appendChild(img);
+    column_img.appendChild(img);
     var name = document.createElement('p');
     name.innerHTML = products[i].title;
-    cell2.appendChild(name);
+    column_info.appendChild(name);
     var category = document.createElement('p');
-    category.innerHTML = "category: " +products[i].category;
-    cell2.appendChild(category);
+    category.innerHTML = "category: " + products[i].category;
+    column_info.appendChild(category);
     var info = document.createElement('p');
     info.innerHTML = products[i].info;
-    cell2.appendChild(info);
+    column_info.appendChild(info);
     var price = document.createElement('p');
     price.innerHTML = "price: " + products[i].price;
-    cell2.appendChild(price);
+    column_info.appendChild(price);
     var quantity = document.createElement('input');
     quantity.type = 'text';
     quantity.style.width = "40px";
-    quantity.value = products[i].quantity;
+    quantity.value = parseInt(products[i].quantity);
     var label = document.createElement('label');
-    label.innerText = "quantity";
-    cell3.appendChild(label);
-    cell3.appendChild(quantity);
+    label.innerText = "quantity: ";
+    column_quantity.appendChild(label);
+    column_quantity.appendChild(quantity);
     quantity.id = i + "q";
     var button = document.createElement('input');
     button.type = 'button';
     button.value = 'ADD TO CART';
-    button.setAttribute('onclick', 'add(' + i + ')');
-    cell4.appendChild(button);
+    button.setAttribute('onclick', 'add_cart(' + i + ')');
+    column_action.appendChild(button);
     }
 }
 function view_cart() { 
@@ -129,64 +133,67 @@ function view_products() {
     
 }
 
-function add (id) {	var table = document.getElementById("carts").rows; 
-     if(!cart_products[id]) {
-     var temp = products[id];
-     cart_products [id] = { "id" : temp["id"], "quantity" : document.getElementById(id + "q").value, "title" : temp["title"], "image" : temp  		["image"], "price" : temp["price"]  };
+function add_cart (id) {	
+    var quantity_val = document.getElementById(id + "q").value;
+    var table = document.getElementById("carts").rows; 
+    if(!cart_items[id] && quantity_val != 0) {
+    var temp = products[id];
+    cart_items [id] = { "id" : temp["id"], "quantity" : quantity_val, "title" : temp["title"], "image" : temp["image"], "price" : temp["price"]  };
     document.getElementById("carts").delete;
     var row = document.getElementById("carts").insertRow(-1);
     count--;
     row.name = "product1";
     row.className = "rows";
     row.id = count;
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
+    var column_product = row.insertCell(0);
+    var column_price = row.insertCell(1);
+    var column_quantity = row.insertCell(2);
+    var column_subtotal = row.insertCell(3);
+    var column_action = row.insertCell(4);
     var img = document.createElement('img');
     img.src = products[id].image;
-    cell1.appendChild(img);
+    column_product.appendChild(img);
     var name = document.createElement('p');
-    name.innerHTML = cart_products[id].title;
-    cell1.appendChild(name);
+    name.innerHTML = cart_items[id].title;
+    column_product.appendChild(name);
     var price = document.createElement('p');
-    price.innerHTML = cart_products[id].price;
-    cell2.appendChild(price);
+    price.innerHTML = cart_items[id].price;
+    column_price.appendChild(price);
     var quantity = document.createElement('input');
     quantity.type = 'text';
     quantity.style.width = "40px";
-    quantity.value = cart_products[id].quantity;
-    quantity.id = id + "s";
-    cell3.appendChild(quantity);
+    quantity.value = cart_items[id].quantity;
+    quantity.id = id + "t";
+    quantity.disabled = "true";
+    column_quantity.appendChild(quantity);
     var subtotal = document.createElement('p');
-    subtotal.innerHTML = cart_products[id].quantity*cart_products[id].price;
-    subtotal.id = id + "t";
-    cell4.appendChild(subtotal);
-    total += cart_products[id].quantity*cart_products[id].price;
+    subtotal.innerHTML = cart_items[id].quantity*cart_items[id].price;
+    subtotal.id = id + "s";
+    column_subtotal.appendChild(subtotal);
+    total += parseInt(cart_items[id].quantity)*parseInt(cart_items[id].price);
     var button = document.createElement('input');
     button.type = 'button';
     button.value = 'remove';
-    button.setAttribute('onclick', 'row_rem(' + row.id + ',' + id + ')');
-    cell5.appendChild(button);
-    } else { 
-        total -= cart_products[id].quantity*cart_products[id].price;
-        cart_products[id].quantity = document.getElementById(id + "q").value;
-        document.getElementById(id + "s").value = cart_products[id].quantity;
-        document.getElementById(id + "t").innerHTML = cart_products[id].quantity*cart_products[id].price; 
-        total += cart_products[id].quantity*cart_products[id].price;
+    button.setAttribute('onclick', 'row_remove(' + row.id + ',' + id + ')');
+    column_action.appendChild(button);
+    } else if (quantity_val != 0) { 
+        total -= parseInt(cart_items[id].quantity)*parseInt(cart_items[id].price);
+        cart_items[id].quantity = quantity_val;
+        document.getElementById(id + "t").value = cart_items[id].quantity;
+        document.getElementById(id + "s").innerHTML = cart_items[id].quantity*cart_items[id].price; 
+        total += cart_items[id].quantity*cart_items[id].price;
    }
     calc_total(total);
     cart_rows = table.length-1;
-    document.getElementById("my_cart").innerHTML = "my cart (" + cart_rows + ")";
+    document.getElementById("my_cart").innerHTML = "MY CART (" + cart_rows + ")";
 }
-function row_rem(row_id, id) {
+function row_remove(row_id, id) {
     document.getElementById("carts").deleteRow(document.getElementById(row_id).rowIndex);
-    total -= cart_products[id].price*cart_products[id].quantity;
-    delete cart_products[id];
+    total -= parseInt(cart_items[id]).parseInt(price*cart_items[id].quantity);
+    delete cart_items[id];
     calc_total(total);
     cart_rows--;
-    document.getElementById("my_cart").innerHTML = "my cart (" + cart_rows + ")";
+    document.getElementById("my_cart").innerHTML = "MY CART (" + cart_rows + ")";
 }
 function calc_total (total) {
     document.getElementById("total").value = total; 
@@ -199,7 +206,7 @@ function calc_total (total) {
 		<div class="header" id="header">
 			<ul>
   				<li  onclick="view_products()"><a >PRODUCTS</a></li>
-				<li onclick="view_cart()"><a id="my_cart">my cart (0)</a></li>
+				<li onclick="view_cart()"><a id="my_cart">MY CART (0)</a></li>
 			</ul>
 		</div><br/>
 		<div id="content">
