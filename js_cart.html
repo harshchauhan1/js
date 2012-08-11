@@ -66,6 +66,10 @@ td {
 width:200px;
 }
 
+img {
+width:100px;
+height:100px;
+}
 
 </style>
 
@@ -170,14 +174,14 @@ function add_cart (id) {
     subtotal.innerHTML = cart_items[id].quantity*cart_items[id].price;
     subtotal.id = id + "s";
     column_subtotal.appendChild(subtotal);
-    total += parseInt(cart_items[id].quantity)*parseInt(cart_items[id].price);
+    total += cart_items[id].quantity*cart_items[id].price;
     var button = document.createElement('input');
     button.type = 'button';
     button.value = 'remove';
     button.setAttribute('onclick', 'row_remove(' + row.id + ',' + id + ')');
     column_action.appendChild(button);
     } else if (quantity_val != 0) { 
-        total -= parseInt(cart_items[id].quantity)*parseInt(cart_items[id].price);
+        total -= cart_items[id].quantity*cart_items[id].price;
         cart_items[id].quantity = quantity_val;
         document.getElementById(id + "t").value = cart_items[id].quantity;
         document.getElementById(id + "s").innerHTML = cart_items[id].quantity*cart_items[id].price; 
@@ -189,7 +193,7 @@ function add_cart (id) {
 }
 function row_remove(row_id, id) {
     document.getElementById("carts").deleteRow(document.getElementById(row_id).rowIndex);
-    total -= parseInt(cart_items[id]).parseInt(price*cart_items[id].quantity);
+    total -= cart_items[id].price*cart_items[id].quantity;
     delete cart_items[id];
     calc_total(total);
     cart_rows--;
