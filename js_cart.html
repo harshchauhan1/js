@@ -76,9 +76,9 @@ height:100px;
 
 <script type="text/javascript">
 var products = [
-{"id":"1", "title":"Apple Macbook Pro", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2299.99", "image":"http://dl.dropbox.com/u/88337953/images1.jpeg", "quantity":"0" },
-{"id":"1", "title":"Sony VAIO", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2699.99", "image":"http://dl.dropbox.com/u/88337953/images2.jpeg", "quantity":"0" },
-{"id":"1", "title":"Canon Digital Rebel XT", "category":"Camera", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"550", "image":"http://dl.dropbox.com/u/88337953/images.jpeg", "quantity":"0" }
+{"id":"1", "title":"Apple Macbook Pro", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2299.99", "image":"http://dl.dropbox.com/u/88337953/images1.jpeg", "quantity":"1" },
+{"id":"1", "title":"Sony VAIO", "category":"Computers", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"2699.99", "image":"http://dl.dropbox.com/u/88337953/images2.jpeg", "quantity":"1" },
+{"id":"1", "title":"Canon Digital Rebel XT", "category":"Camera", "info":"The Intel Core 2 duo powering Macbook Pro is basically two processor built into single chip.", "price":"550", "image":"http://dl.dropbox.com/u/88337953/images.jpeg", "quantity":"1" }
 ];
 var cart_items = {};
 var total = 0;
@@ -143,6 +143,12 @@ function add_cart (id) {
     if(!cart_items[id] && quantity_val != 0) {
     var temp = products[id];
     cart_items [id] = { "id" : temp["id"], "quantity" : quantity_val, "title" : temp["title"], "image" : temp["image"], "price" : temp["price"]  };
+    create_cart_view(id, table);
+    } else if (quantity_val != 0) {
+        refresh_cart_view(id, quantity_val, table);
+    }    
+}
+function create_cart_view(id, table) {
     document.getElementById("carts").delete;
     var row = document.getElementById("carts").insertRow(-1);
     count--;
@@ -180,16 +186,17 @@ function add_cart (id) {
     button.value = 'remove';
     button.setAttribute('onclick', 'row_remove(' + row.id + ',' + id + ')');
     column_action.appendChild(button);
-    } else if (quantity_val != 0) { 
+    calc_total(total);
+    cart_rows = table.length-1;
+    document.getElementById("my_cart").innerHTML = "MY CART (" + cart_rows + ")";
+} 
+function refresh_cart_view (id, quantity_val, table) { 
         total -= cart_items[id].quantity*cart_items[id].price;
         cart_items[id].quantity = quantity_val;
         document.getElementById(id + "t").value = cart_items[id].quantity;
         document.getElementById(id + "s").innerHTML = cart_items[id].quantity*cart_items[id].price; 
         total += cart_items[id].quantity*cart_items[id].price;
-   }
-    calc_total(total);
-    cart_rows = table.length-1;
-    document.getElementById("my_cart").innerHTML = "MY CART (" + cart_rows + ")";
+        calc_total(total);
 }
 function row_remove(row_id, id) {
     document.getElementById("carts").deleteRow(document.getElementById(row_id).rowIndex);
